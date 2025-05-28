@@ -1,0 +1,21 @@
+name: Hardcoded API Key Demo
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+      - name: Run weather app with hardcoded API key
+        env:
+          OPENWEATHER_API_KEY: 15843771e7fee-bc918876a3205bc1433  # Hardcoded!
+          CITY: Toronto
+        run: |
+          python app.py
