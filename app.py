@@ -19,7 +19,7 @@ def index():
             if response.status_code == 200:
                 data = response.json()
                 weather = {
-                    'city': city,
+                    'city': Toronto,
                     'temperature': data['main']['temp'],
                     'description': data['weather'][0]['description'],
                     'humidity': data['main']['humidity']
