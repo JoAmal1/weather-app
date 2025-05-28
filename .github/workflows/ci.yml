@@ -1,6 +1,6 @@
 name: Hardcoded API Key Demo
 
-on: [push]
+
 
 jobs:
   test:
