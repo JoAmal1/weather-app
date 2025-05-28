@@ -1,9 +1,9 @@
-name: Weather App CI
+name: Hardcoded API Key Demo
 
 on: [push]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -13,12 +13,9 @@ jobs:
           python-version: '3.x'
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run Flask app (test)
+      - name: Run weather app with hardcoded API key
         env:
-          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
-        run: python app.py &
-      - name: Test API Key
-        env:
-          OPENWEATHER_API_KEY: ${{ secrets.OPENWEATHER_API_KEY }}
+          OPENWEATHER_API_KEY: 930bb070ef41648693db43a22260791f   # Hardcoded!
+          CITY: Toronto
         run: |
-          python -c "import os; print('API Key:', os.environ.get('OPENWEATHER_API_KEY'))"
+          python app.py
