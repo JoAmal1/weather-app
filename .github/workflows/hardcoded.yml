@@ -1,21 +1,27 @@
-name: Hardcoded API Key Demo
+name: Weather API Insecure Workflow
 
-on: [push]
+on:
+  push:
+    paths:
+      - .github/workflows/hardcoded-api.yml
 
 jobs:
-  test:
+  run-weather-api-insecure:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v3
+
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.x'
+          python-version: '3.11'
+
       - name: Install dependencies
-        run: pip install -r requirements.txt
-      - name: Run weather app with hardcoded API key
-        env:
-          OPENWEATHER_API_KEY: 15843771e7fee-bc918876a3205bc1433  # Hardcoded!
-          CITY: Toronto
         run: |
-          python app.py
+          pip install -r requirements.txt
+
+      - name: Run API test using hardcoded key
+        env:
+          WEATHER_API_KEY: a89c2f3c4e2c417696081ee401503871
+        run: python app.py
